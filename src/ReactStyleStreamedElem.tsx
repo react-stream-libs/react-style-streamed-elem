@@ -11,11 +11,11 @@ import css = require('dom-css');
 
 export type StyleStreamType = Observable<React.CSSProperties>;
 
-export type PropsType = {
+export type PropsType = React.HTMLProps<HTMLAllElementsType> &
+{
   tagName: string,
   styleStream: StyleStreamType,
-  style: null,
-} & React.HTMLProps<HTMLAllElementsType>;
+};
 
 export type StateType = {
   style?: React.CSSProperties,
