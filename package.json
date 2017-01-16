@@ -5,13 +5,13 @@
     "es6_to_es5": "babel lib_es6 --out-dir lib",
     "cp_d.ts_files_shallow": "copyfiles --up 1 'lib_es6/*.d.ts' lib",
     "build": "npm run build_es6 && npm run es6_to_es5 && npm run cp_d.ts_files_shallow",
-    "prepublish": "npm run build"
+    "prepublish": "npm run clean && npm run build"
   },
   "name": "react-style-streamed-elem",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Style-streamed (rxjs) React element",
-  "main": "lib/ReactStreamedText.js",
-  "types": "lib/ReactStreamedText.d.ts",
+  "main": "lib/ReactStyleStreamedElem.js",
+  "types": "lib/ReactStyleStreamedElem.d.ts",
   "repository": "https://github.com/react-stream-libs/react-style-streamed-elem.git",
   "author": "devdoomari <devdoomari __at__ gmail dotttt commmm>",
   "license": "Personal",
