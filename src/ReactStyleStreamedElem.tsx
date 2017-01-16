@@ -45,14 +45,10 @@ export default class ReactStreamedText
     this.styleSubscription.unsubscribe();
   }
   render() {
-    const {
-      style,
-    } = this.state;
-
     const props = _.assign({}, this.props, {
       tagName: null, styleStream: null,
       style: this.state.style,
-    }); //_.omit(this.props, ['tagName', 'styleStream']);
+    });
     return React.createElement(
       this.props.tagName, Object.assign({}, props, {
         ref: 'targetDOM',
