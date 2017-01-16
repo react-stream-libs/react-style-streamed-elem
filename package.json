@@ -8,7 +8,7 @@
     "prepublish": "npm run clean && npm run build"
   },
   "name": "react-style-streamed-elem",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Style-streamed (rxjs) React element",
   "main": "lib/ReactStyleStreamedElem.js",
   "types": "lib/ReactStyleStreamedElem.d.ts",

@@ -15,6 +15,7 @@ export type PropsType = React.HTMLProps<HTMLAllElementsType> &
 {
   tagName: string,
   styleStream: StyleStreamType,
+  style?: null,
 };
 
 export type StateType = {
@@ -48,11 +49,14 @@ export default class ReactStreamedText
       style,
     } = this.state;
 
-    const props = _.omit(this.props, ['tagName', 'styleStream']);
+    const props = _.assign({}, this.props, {
+      tagName: null, styleStream: null,
+      style: this.state.style,
+    }); //_.omit(this.props, ['tagName', 'styleStream']);
     return React.createElement(
       this.props.tagName, Object.assign({}, props, {
         ref: 'targetDOM',
-      }), style
+      }), this.props.children
     );
   }
 }
