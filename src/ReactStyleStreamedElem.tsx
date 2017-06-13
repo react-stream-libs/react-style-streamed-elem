@@ -20,21 +20,17 @@ export type PropsType = React.HTMLProps<HTMLAllElementsType> &
 
 export default class ReactStyleStreamedElem
     extends React.Component<PropsType, void> {
-
+  targetElem: HTMLElement;
   __style?: React.CSSProperties;
   styleSubscription: Subscription;
-  refs: {
-    targetDOM: HTMLElement;
-  };
   constructor(props: PropsType) {
     super(props);
   }
   componentDidMount() {
-    const targetDOM = findDOMNode<HTMLElement>(this.refs.targetDOM);
     this.styleSubscription = this.props.styleStream
       .subscribe((style) => {
         this.__style = style;
-        css(targetDOM, style);
+        css(this.targetElem, style);
       });
   }
   componentWillUnmount() {
@@ -47,7 +43,9 @@ export default class ReactStyleStreamedElem
     });
     return React.createElement(
       this.props.tagName, Object.assign({}, props, {
-        ref: 'targetDOM',
+        ref: (targetElem: HTMLElement) => {
+          this.targetElem = targetElem;
+        },
       }), this.props.children
     );
   }
