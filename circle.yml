@@ -34,6 +34,7 @@ deployment:
       - git merge -X theirs --no-edit master
       - nvm install 8
       - npm install
+      - npm run clean && npm run build
       - git add -f lib
       - git add -f lib_es6
       - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
@@ -49,6 +50,7 @@ deployment:
       - git merge -X theirs --no-edit $CIRCLE_BRANCH
       - nvm install 8
       - npm install
+      - npm run clean && npm run build
       - git add -f lib
       - git add -f lib_es6
       - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
@@ -64,6 +66,7 @@ deployment:
       - git merge -X theirs --no-edit $CIRCLE_BRANCH
       - nvm install 8
       - npm install
+      - npm run clean && npm run build
       - git add -f lib
       - git add -f lib_es6
       - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
