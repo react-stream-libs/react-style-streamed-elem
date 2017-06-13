@@ -16,7 +16,7 @@ dependencies:
   post:
     - sudo dpkg -i $HOME/.local/debs/*.deb
     - nvm install 8
-    - cd $HOME/reactive-renderer
+    - cd $HOME/react-style-streamed-elem
     - npm install
 
 test:
