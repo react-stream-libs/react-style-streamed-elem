@@ -18,14 +18,13 @@ export type PropsType = React.HTMLProps<HTMLAllElementsType> &
   style?: null,
 };
 
-export default class ReactStreamedText
+export default class ReactStyleStreamedElem
     extends React.Component<PropsType, void> {
 
   __style?: React.CSSProperties;
   styleSubscription: Subscription;
   refs: {
-    [key: string]: HTMLElement;
-    targetDOM: HTMLHeadingElement;
+    targetDOM: HTMLElement;
   };
   constructor(props: PropsType) {
     super(props);
