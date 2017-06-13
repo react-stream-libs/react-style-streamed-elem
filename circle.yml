@@ -15,6 +15,7 @@ dependencies:
       ; fi
   post:
     - sudo dpkg -i $HOME/.local/debs/*.deb
+    - nvm install 8
     - cd $HOME/reactive-renderer
     - npm install
 
@@ -31,7 +32,8 @@ deployment:
       - git checkout -b dist
       - git pull origin master
       - git merge -X theirs --no-edit master
-      - npm run build
+      - nvm install 8
+      - npm install
       - git add -f lib
       - git add -f lib_es6
       - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
@@ -45,7 +47,8 @@ deployment:
       - git checkout -b "$CIRCLE_BRANCH"'-dist'
       - git pull origin $CIRCLE_BRANCH
       - git merge -X theirs --no-edit $CIRCLE_BRANCH
-      - npm run build
+      - nvm install 8
+      - npm install
       - git add -f lib
       - git add -f lib_es6
       - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
@@ -59,7 +62,8 @@ deployment:
       - git checkout -b "$CIRCLE_BRANCH"'-dist'
       - git pull origin $CIRCLE_BRANCH
       - git merge -X theirs --no-edit $CIRCLE_BRANCH
-      - npm run build
+      - nvm install 8
+      - npm install
       - git add -f lib
       - git add -f lib_es6
       - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
