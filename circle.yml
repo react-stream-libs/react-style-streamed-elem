@@ -1,0 +1,67 @@
+machine:
+  node:
+    version: 8.1.0
+
+dependencies:
+  override:
+    - /bin/true
+  cache_directories:
+    - "~/.local"
+  pre:
+    - >-
+      if [[ ! -d "$HOME/.local/debs" ]]; then \
+        mkdir -p "$HOME/.local/debs"; cd "$HOME/.local/debs" \
+        && sudo apt-get download libgif-dev \
+      ; fi
+  post:
+    - sudo dpkg -i $HOME/.local/debs/*.deb
+    - cd $HOME/reactive-renderer
+    - npm install
+
+test:
+  override:
+    - npm run test
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - git config user.email "devdoomari@gmail.com"
+      - git config user.name "devdoomari.circleci"
+      - git checkout -b dist
+      - git pull origin master
+      - git merge -X theirs --no-edit master
+      - npm run build
+      - git add -f lib
+      - git add -f lib_es6
+      - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
+      - git tag -a $'dist_'"$CIRCLE_BRANCH"'_'"$CIRCLE_BUILD_NUM" -m "dist-feature"
+      - git push --force origin dist --follow-tags
+  develop:
+    branch: develop
+    commands:
+      - git config user.email "devdoomari@gmail.com"
+      - git config user.name "devdoomari.circleci"
+      - git checkout -b "$CIRCLE_BRANCH"'-dist'
+      - git pull origin $CIRCLE_BRANCH
+      - git merge -X theirs --no-edit $CIRCLE_BRANCH
+      - npm run build
+      - git add -f lib
+      - git add -f lib_es6
+      - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
+      - git tag -a $'dist_'"$CIRCLE_BRANCH"'_'"$CIRCLE_BUILD_NUM" -m "dist-feature"
+      - git push --force origin "$CIRCLE_BRANCH"'-dist' --follow-tags
+  feature:
+    branch: /feature.*/
+    commands:
+      - git config user.email "devdoomari@gmail.com"
+      - git config user.name "devdoomari.circleci"
+      - git checkout -b "$CIRCLE_BRANCH"'-dist'
+      - git pull origin $CIRCLE_BRANCH
+      - git merge -X theirs --no-edit $CIRCLE_BRANCH
+      - npm run build
+      - git add -f lib
+      - git add -f lib_es6
+      - git commit --allow-empty -m $'generated from:'"$CIRCLE_SHA1"$'\ntriggered by:'"$CIRCLE_USERNAME"$'\n[ci skip]'
+      - git tag -a $'dist_'"$CIRCLE_BRANCH"'_'"$CIRCLE_BUILD_NUM" -m "dist-feature"
+      - git push --force origin "$CIRCLE_BRANCH"'-dist' --follow-tags
