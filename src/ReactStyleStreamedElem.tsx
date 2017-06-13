@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { findDOMNode } from 'react-dom';
 import {
   Observable,
   Subscription,
