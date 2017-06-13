@@ -18,12 +18,10 @@ export type PropsType = React.HTMLProps<HTMLAllElementsType> &
   style?: null,
 };
 
-export type StateType = {
-  style?: React.CSSProperties,
-};
-
 export default class ReactStreamedText
-    extends React.Component<PropsType, StateType> {
+    extends React.Component<PropsType, void> {
+
+  __style?: React.CSSProperties;
   styleSubscription: Subscription;
   refs: {
     [key: string]: HTMLElement;
@@ -31,13 +29,12 @@ export default class ReactStreamedText
   };
   constructor(props: PropsType) {
     super(props);
-    this.state = {};
   }
   componentDidMount() {
     const targetDOM = findDOMNode<HTMLElement>(this.refs.targetDOM);
     this.styleSubscription = this.props.styleStream
       .subscribe((style) => {
-        this.state.style = style;
+        this.__style = style;
         css(targetDOM, style);
       });
   }
@@ -47,7 +44,7 @@ export default class ReactStreamedText
   render() {
     const props = _.assign({}, this.props, {
       tagName: null, styleStream: null,
-      style: this.state.style,
+      style: this.__style,
     });
     return React.createElement(
       this.props.tagName, Object.assign({}, props, {
