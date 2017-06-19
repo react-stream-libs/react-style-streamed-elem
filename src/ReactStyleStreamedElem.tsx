@@ -33,7 +33,7 @@ export default class ReactStyleStreamedElem
       });
   }
   componentWillUnmount() {
-    this.styleSubscription.unsubscribe();
+    this.styleSubscription && this.styleSubscription.unsubscribe();
   }
   render() {
     const props = _.assign({}, this.props, {
