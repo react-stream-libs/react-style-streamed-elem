@@ -2,14 +2,17 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "declaration": true,
+    "declaration": false,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "allowJs": false,
     "jsx": "react",
     "experimentalDecorators": true,
-    "rootDir": "src",
-    "outDir": "lib_es6"
+    "rootDirs": [
+      "src",
+      "storybook-ts"
+    ],
+    "outDir": "ts_processed"
   },
   "filesGlob": [
     "src/*.ts",
@@ -19,6 +22,7 @@
     "node_modules/**/*.d.ts"
   ],
   "exclude": [
+    "ts_processed",
     "node_modules",
     "!node_modules/rxjs",
     "lib",

@@ -2,3 +2,4 @@ node_modules
 lib
 lib_es6
 *.log
+ts_processed

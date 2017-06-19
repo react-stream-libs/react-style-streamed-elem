@@ -19,6 +19,7 @@
     "node_modules/**/*.d.ts"
   ],
   "exclude": [
+    "ts_processed",
     "node_modules",
     "!node_modules/rxjs",
     "lib",
