@@ -33,7 +33,8 @@ deployment:
       - git pull origin master
       - git merge -X theirs --no-edit master
       - nvm install 8
-      - npm install
+      - npm i -g yarn
+      - yarn install
       - npm run clean && npm run build
       - git add -f lib
       - git add -f lib_es6
@@ -49,7 +50,8 @@ deployment:
       - git pull origin $CIRCLE_BRANCH
       - git merge -X theirs --no-edit $CIRCLE_BRANCH
       - nvm install 8
-      - npm install
+      - npm i -g yarn
+      - yarn install
       - npm run clean && npm run build
       - git add -f lib
       - git add -f lib_es6
