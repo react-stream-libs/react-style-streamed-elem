@@ -3,3 +3,4 @@ lib
 lib_es6
 *.log
 ts_processed
+.vscode

@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 8.1.0
+    version: 8.9.1
 
 dependencies:
   override:
@@ -13,11 +13,11 @@ dependencies:
         mkdir -p "$HOME/.local/debs"; cd "$HOME/.local/debs" \
         && sudo apt-get download libgif-dev \
       ; fi
+    - npm i -g yarn
   post:
     - sudo dpkg -i $HOME/.local/debs/*.deb
-    - nvm install 8
     - cd $HOME/react-style-streamed-elem
-    - npm install
+    - yarn install
 
 test:
   override:

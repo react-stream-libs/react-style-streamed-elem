@@ -18,7 +18,7 @@ export type PropsType = React.HTMLProps<HTMLAllElementsType> &
 };
 
 export default class ReactStyleStreamedElem
-    extends React.Component<PropsType, void> {
+    extends React.Component<PropsType> {
   targetElem: HTMLElement;
   __style?: React.CSSProperties;
   styleSubscription: Subscription;
